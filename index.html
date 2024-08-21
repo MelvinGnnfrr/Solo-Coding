@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roblox Leaderboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Blank Space for Logo -->
+    <div class="container">
+        
+    </div>
+
+    <!-- Leaderboard Section -->
+    <div id="leaderboard">
+        <h2>Leaderboard</h2>
+        <div id="leaderboard-items">
+            <!-- Leaderboard items will be added here -->
+        </div>
+    </div>
+
+    <script>
+        // Sample data (this would come from your Roblox game)
+        const players = [
+            { username: 'Player1', score: 150 },
+            { username: 'Player2', score: 120 },
+            { username: 'Player3', score: 100 },
+        ];
+
+        const leaderboard = document.getElementById('leaderboard-items');
+
+        // Function to add players to the leaderboard
+        function updateLeaderboard(players) {
+            players.forEach(player => {
+                const item = document.createElement('div');
+                item.className = 'leaderboard-item';
+                item.innerHTML = `<span>${player.username}</span><span>${player.score}</span>`;
+                leaderboard.appendChild(item);
+            });
+        }
+
+        // Update leaderboard with sample data
+        updateLeaderboard(players);
+    </script>
+
+</body>
+</html>
