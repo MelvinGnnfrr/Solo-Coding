@@ -22,28 +22,31 @@
     </div>
 
     <script>
-        // Sample data (this would come from your Roblox game)
-        const players = [
-            { username: 'Player1', score: 150 },
-            { username: 'Player2', score: 120 },
-            { username: 'Player3', score: 100 },
-        ];
+    // Function to fetch and update the leaderboard
+    function updateLeaderboard() {
+        fetch('leaderboard.json')  // Path to the JSON file with leaderboard data
+            .then(response => response.json())
+            .then(data => {
+                const leaderboard = document.getElementById('leaderboard-items');
+                leaderboard.innerHTML = '';  // Clear existing items
 
-        const leaderboard = document.getElementById('leaderboard-items');
+                Object.keys(data).forEach(username => {
+                    const score = data[username];
+                    const item = document.createElement('div');
+                    item.className = 'leaderboard-item';
+                    item.innerHTML = `<span>${username}</span><span>${score}</span>`;
+                    leaderboard.appendChild(item);
+                });
+            })
+            .catch(error => console.error('Error fetching leaderboard data:', error));
+    }
 
-        // Function to add players to the leaderboard
-        function updateLeaderboard(players) {
-            players.forEach(player => {
-                const item = document.createElement('div');
-                item.className = 'leaderboard-item';
-                item.innerHTML = `<span>${player.username}</span><span>${player.score}</span>`;
-                leaderboard.appendChild(item);
-            });
-        }
+    // Update leaderboard when the page loads
+    document.addEventListener('DOMContentLoaded', updateLeaderboard);
 
-        // Update leaderboard with sample data
-        updateLeaderboard(players);
-    </script>
-
+    // Optionally, set up an interval to refresh the leaderboard periodically
+    setInterval(updateLeaderboard, 60000);  // Refresh every 60 seconds
+</script>
+    
 </body>
 </html>
